@@ -1,16 +1,17 @@
-## Constructor-type function, getter-type function
+##Memoized inverted matrix assignment for Coursera R Programming
 ##
-## Essentially, memoize the result of the expensive operation
-## 
-##
-## Curious how this will merge with my 
-## version at home that I haven't committed yet
+##Usage:
+##source("cachematrix.R")
+##mat <- makeCacheMatrix(matrix(args))
+##cacheSolve(mat)
+##matinv <- mat$getinv()
 ##
 ## This actually shows measurable performance lag when testing:
 ## m <- matrix(data = rnorm(1000*1000), nrow=1000, ncol = 1000)
 ## cm <- solve(m)
+##
 
-## Write a short comment describing this function
+## Create the CacheMatrix and expose the methods
 
 makeCacheMatrix <- function(x = matrix()) {
   ## strongly based on the example from the problem description
@@ -24,7 +25,7 @@ makeCacheMatrix <- function(x = matrix()) {
   
   get <- function() x ## return value either created or set
   setinv <- function(inv) minv <<- inv
-  getinv <- function() minv
+  getinv <- function() minv ## must be calculated manually, otherwise null
   
   list(set = set, get = get,
        setinv = setinv, getinv = getinv)
